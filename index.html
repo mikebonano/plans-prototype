@@ -1,28 +1,506 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>mikebonano</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #0f0f0f;
-      color: #f0f0f0;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+  <title>OpenCloud – Preise</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            lilac: '#e2baff',
+            'lilac-dark': '#ca8df5',
+            petrol: '#20434f',
+            'petrol-dark': '#19353f',
+            paper: '#f1f3f4',
+          }
+        }
+      }
     }
-    h1 { font-size: 3rem; font-weight: 700; letter-spacing: -0.02em; }
-    p { margin-top: 0.75rem; color: #888; font-size: 1.1rem; }
+  </script>
+  <style>
+    .btn-pill { border-radius: 50px; transition: all 0.3s ease-in-out; }
+    .card { border-radius: 6px; }
+    .card-rec { box-shadow: 0 0 0 2px #ca8df5; }
+    .hdr-scrolled { backdrop-filter: blur(12px); background-color: rgba(241,243,244,0.88) !important; }
+    .col-biz { background-color: rgba(226,186,255,0.07); }
+    .acc-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s ease-in-out; }
+    .acc-body.open { grid-template-rows: 1fr; }
+    .acc-body > div { overflow: hidden; }
+    .chevron { transition: transform 0.3s ease-in-out; }
+    .chevron.rotated { transform: rotate(180deg); }
+    .cat-hdr td { background-color: #e8eaeb !important; font-weight: 600; color: #20434f; font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; }
+    .feat-tbody tr:nth-child(even):not(.cat-hdr) td { background-color: rgba(0,0,0,0.018); }
+    .feat-col-sticky { position: sticky; left: 0; background: inherit; z-index: 1; }
+    .feat-tbody tr:hover td { background-color: rgba(226,186,255,0.06); }
+    .feat-tbody .cat-hdr:hover td { background-color: #e8eaeb !important; }
   </style>
 </head>
-<body>
-  <div>
-    <h1>mikebonano</h1>
-    <p>Hello, world. More coming soon.</p>
+<body class="bg-paper text-gray-800 font-sans">
+
+<!-- HEADER -->
+<header id="hdr" class="fixed top-0 left-0 right-0 z-50 bg-paper transition-all duration-300">
+  <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+    <a href="https://opencloud.eu" class="text-petrol font-bold text-xl tracking-tight">OpenCloud</a>
+    <a href="https://opencloud.eu/de/kontakt" class="btn-pill bg-petrol text-white px-5 py-2 text-sm font-semibold hover:bg-petrol-dark">Anfragen</a>
   </div>
+</header>
+
+<!-- HERO -->
+<section class="pt-32 pb-16 text-center px-4">
+  <h1 class="text-4xl md:text-5xl font-bold text-petrol leading-tight">Einfache, transparente Preise</h1>
+  <p class="mt-4 text-lg text-gray-500 max-w-xl mx-auto">Wählen Sie den Plan, der zu Ihrem Unternehmen passt – von kleinen Teams bis zu globalen Enterprises.</p>
+</section>
+
+<!-- PRICING CARDS -->
+<section class="max-w-6xl mx-auto px-4 pb-16">
+  <div class="grid md:grid-cols-3 gap-6">
+
+    <!-- Pro -->
+    <div class="card bg-white p-8 flex flex-col shadow-sm">
+      <div class="mb-6">
+        <h2 class="text-xl font-bold text-petrol">Pro</h2>
+        <div class="mt-3 flex items-end gap-1">
+          <span class="text-4xl font-bold text-gray-900">50 €</span>
+          <span class="text-gray-400 text-sm mb-1">/Nutzer pro Jahr</span>
+        </div>
+        <p class="mt-1 text-xs text-gray-400 uppercase tracking-wider">Ab 10 Nutzer</p>
+        <p class="mt-3 text-gray-500 text-sm leading-relaxed">Für kleine Teams, die Sicherheit für ihre Produktivumgebung brauchen.</p>
+      </div>
+      <ul class="space-y-2 mb-8 flex-1 text-sm">
+        <li class="flex items-start gap-2"><span class="text-petrol font-bold mt-0.5">✓</span>Zugang zu Production Releases (LTS)</li>
+        <li class="flex items-start gap-2"><span class="text-petrol font-bold mt-0.5">✓</span>Zugang zu Long-Term Support Releases</li>
+        <li class="flex items-start gap-2"><span class="text-petrol font-bold mt-0.5">✓</span>Vorabzugang zu Sicherheits-Patches</li>
+        <li class="flex items-start gap-2"><span class="text-petrol font-bold mt-0.5">✓</span>Community Support</li>
+      </ul>
+      <a href="https://opencloud.eu/de/kontakt" class="btn-pill block text-center border-2 border-petrol text-petrol px-5 py-3 text-sm font-semibold hover:bg-petrol hover:text-white">Anfragen</a>
+    </div>
+
+    <!-- Business (highlighted) -->
+    <div class="card card-rec bg-white p-8 flex flex-col shadow-md relative">
+      <div class="absolute -top-4 left-1/2 -translate-x-1/2">
+        <span class="btn-pill bg-lilac-dark text-white text-xs font-bold px-4 py-1.5 shadow">Empfohlen</span>
+      </div>
+      <div class="mb-6">
+        <h2 class="text-xl font-bold text-petrol">Business</h2>
+        <div class="mt-3 flex items-end gap-1">
+          <span class="text-4xl font-bold text-gray-900">80 €</span>
+          <span class="text-gray-400 text-sm mb-1">/Nutzer pro Jahr</span>
+        </div>
+        <p class="mt-1 text-xs text-gray-400 uppercase tracking-wider">Ab 100 Nutzer</p>
+        <p class="mt-3 text-gray-500 text-sm leading-relaxed">Für Unternehmen ab 100 Mitarbeitenden mit Bedarf an Hochverfügbarkeit und Skalierung.</p>
+      </div>
+      <ul class="space-y-2 mb-8 flex-1 text-sm">
+        <li class="flex items-start gap-2"><span class="text-lilac-dark font-bold mt-0.5">✓</span>Alles aus dem Pro Plan</li>
+        <li class="flex items-start gap-2"><span class="text-lilac-dark font-bold mt-0.5">✓</span>Hochverfügbarkeit (Helm-Charts)</li>
+        <li class="flex items-start gap-2"><span class="text-lilac-dark font-bold mt-0.5">✓</span>Zugang SBOM</li>
+        <li class="flex items-start gap-2"><span class="text-lilac-dark font-bold mt-0.5">✓</span>Password-Policy &amp; DSGVO Export</li>
+        <li class="flex items-start gap-2"><span class="text-lilac-dark font-bold mt-0.5">✓</span>Professional Support (optional)</li>
+      </ul>
+      <a href="https://opencloud.eu/de/kontakt" class="btn-pill block text-center bg-lilac-dark text-white px-5 py-3 text-sm font-semibold hover:bg-petrol">Anfragen</a>
+    </div>
+
+    <!-- Enterprise -->
+    <div class="card bg-white p-8 flex flex-col shadow-sm">
+      <div class="mb-6">
+        <h2 class="text-xl font-bold text-petrol">Enterprise</h2>
+        <div class="mt-3 flex items-end gap-1">
+          <span class="text-4xl font-bold text-gray-900">170 €</span>
+          <span class="text-gray-400 text-sm mb-1">/Nutzer pro Jahr</span>
+        </div>
+        <p class="mt-1 text-xs text-gray-400 uppercase tracking-wider">Ab 1.000 Nutzer</p>
+        <p class="mt-3 text-gray-500 text-sm leading-relaxed">Für Unternehmen, die OpenCloud als Service anbieten.</p>
+      </div>
+      <ul class="space-y-2 mb-8 flex-1 text-sm">
+        <li class="flex items-start gap-2"><span class="text-petrol font-bold mt-0.5">✓</span>Alles aus dem Business Plan</li>
+        <li class="flex items-start gap-2"><span class="text-petrol font-bold mt-0.5">✓</span>Multi-Tenancy</li>
+        <li class="flex items-start gap-2"><span class="text-petrol font-bold mt-0.5">✓</span>White-Label / OEM</li>
+        <li class="flex items-start gap-2"><span class="text-petrol font-bold mt-0.5">✓</span>Einfluss auf die Produkt-Roadmap</li>
+        <li class="flex items-start gap-2"><span class="text-petrol font-bold mt-0.5">✓</span>Professional Support mit SLA (optional)</li>
+      </ul>
+      <a href="https://opencloud.eu/de/kontakt" class="btn-pill block text-center border-2 border-petrol text-petrol px-5 py-3 text-sm font-semibold hover:bg-petrol hover:text-white">Anfragen</a>
+    </div>
+  </div>
+</section>
+
+<!-- HPC ADD-ON -->
+<section class="max-w-6xl mx-auto px-4 pb-16">
+  <div class="card bg-white p-8 md:p-10 shadow-sm">
+    <div class="md:grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <span class="inline-block text-xs font-bold uppercase tracking-widest text-lilac-dark border border-lilac rounded-full px-3 py-1 mb-3">Add-on</span>
+        <h2 class="text-2xl font-bold text-petrol">High Performance Computing</h2>
+        <p class="mt-3 text-gray-500 leading-relaxed">Für Forschung, KI und High-Performance-Workloads mit nativer Integration bestehender Speichersysteme.</p>
+        <ul class="mt-4 space-y-2 text-sm">
+          <li class="flex items-start gap-2"><span class="text-petrol font-bold mt-0.5">✓</span>Direkter Filesystem-Zugriff</li>
+          <li class="flex items-start gap-2"><span class="text-petrol font-bold mt-0.5">✓</span>Dateien sofort in OpenCloud sichtbar</li>
+          <li class="flex items-start gap-2"><span class="text-petrol font-bold mt-0.5">✓</span>Integration in Ceph, GPFS, Leil FS</li>
+        </ul>
+        <a href="https://opencloud.eu/de/kontakt" class="btn-pill inline-block mt-6 bg-petrol text-white px-6 py-3 text-sm font-semibold hover:bg-petrol-dark">Anfragen</a>
+      </div>
+      <div class="mt-8 md:mt-0 text-center md:text-right">
+        <div class="text-6xl font-bold text-petrol">10 €</div>
+        <div class="text-gray-400 mt-2">/TB pro Jahr</div>
+        <div class="text-gray-400 text-sm mt-1">ab 1 PT</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NICHT DAS RICHTIGE? -->
+<section class="max-w-6xl mx-auto px-4 pb-20">
+  <h2 class="text-2xl font-bold text-petrol mb-6 text-center">Nicht das Richtige dabei?</h2>
+  <div class="grid md:grid-cols-2 gap-6">
+    <div class="card border-2 border-dashed border-gray-300 p-8 bg-white">
+      <h3 class="text-lg font-bold text-petrol mb-2">Community Edition</h3>
+      <p class="text-gray-500 text-sm mb-5 leading-relaxed">Eine frei verfügbare, selbst gehostete Version von OpenCloud ist auf GitHub verfügbar.</p>
+      <div class="flex gap-5">
+        <a href="https://doc.opencloud.eu" class="text-lilac-dark text-sm font-semibold hover:underline">→ Dokumentation</a>
+        <a href="https://github.com/opencloudeu/opencloud" class="text-lilac-dark text-sm font-semibold hover:underline">→ GitHub</a>
+      </div>
+    </div>
+    <div class="card border-2 border-dashed border-gray-300 p-8 bg-white">
+      <h3 class="text-lg font-bold text-petrol mb-2">Gemeinnützige Vereine</h3>
+      <p class="text-gray-500 text-sm mb-5 leading-relaxed">Wir unterstützen gemeinnützige Vereine und Open Source Projekte.</p>
+      <a href="https://opencloud.eu/de/kontakt" class="text-lilac-dark text-sm font-semibold hover:underline">→ Schreiben Sie uns an</a>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE TABLE -->
+<section class="max-w-6xl mx-auto px-4 pb-20">
+  <h2 class="text-2xl font-bold text-petrol mb-6 text-center">Leistungsübersicht</h2>
+  <div class="overflow-x-auto rounded-lg shadow-sm border border-gray-200">
+    <table class="w-full min-w-[620px] bg-white text-sm border-collapse">
+      <thead>
+        <tr class="sticky top-16 z-10 bg-petrol text-white">
+          <th class="feat-col-sticky bg-petrol text-left px-4 py-3 font-semibold w-56">Feature</th>
+          <th class="px-4 py-3 font-semibold text-center w-28">Community</th>
+          <th class="px-4 py-3 font-semibold text-center w-24">Pro</th>
+          <th class="col-biz px-4 py-3 font-semibold text-center w-28">Business</th>
+          <th class="px-4 py-3 font-semibold text-center w-28">Enterprise</th>
+        </tr>
+      </thead>
+      <tbody class="feat-tbody">
+        <!-- Datei-Management -->
+        <tr class="cat-hdr"><td colspan="5" class="px-4 py-2">Datei-Management</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Dateiablage &amp; Ordnerverwaltung</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Spaces / Arbeitsbereiche</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Versionierung</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Volltextsuche</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Datei-Sperrung</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Metadaten-Unterstützung</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Papierkorb</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+
+        <!-- Sharing & Kollaboration -->
+        <tr class="cat-hdr"><td colspan="5" class="px-4 py-2">Sharing &amp; Kollaboration</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Datei- &amp; Ordnerfreigaben</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Öffentliche Links</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Passwortschutz für Freigaben</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Ablaufdaten für Freigaben</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Federated Sharing</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Gastnutzer</td><td class="text-center px-4 py-2.5 text-gray-300">—</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Filedrop Uploads</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Aktivitäten-Stream</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Secure View (Collabora Office)</td><td class="text-center px-4 py-2.5 text-gray-300">—</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+
+        <!-- Office & Dokumente -->
+        <tr class="cat-hdr"><td colspan="5" class="px-4 py-2">Office &amp; Dokumente</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Collabora Integration</td><td class="text-center px-4 py-2.5"><span class="text-petrol font-bold">✓</span> <span class="text-xs text-gray-400">(CODE)</span></td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Collabora Writer</td><td class="text-center px-4 py-2.5"><span class="text-petrol font-bold">✓</span> <span class="text-xs text-gray-400">(CODE)</span></td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Collabora Calc</td><td class="text-center px-4 py-2.5"><span class="text-petrol font-bold">✓</span> <span class="text-xs text-gray-400">(CODE)</span></td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Collabora Impress</td><td class="text-center px-4 py-2.5"><span class="text-petrol font-bold">✓</span> <span class="text-xs text-gray-400">(CODE)</span></td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Collabora Draw</td><td class="text-center px-4 py-2.5"><span class="text-petrol font-bold">✓</span> <span class="text-xs text-gray-400">(CODE)</span></td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Browserbasierte Office-Bearbeitung</td><td class="text-center px-4 py-2.5"><span class="text-petrol font-bold">✓</span> <span class="text-xs text-gray-400">(CODE)</span></td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">PDF Annotationen mobil</td><td class="text-center px-4 py-2.5"><span class="text-petrol font-bold">✓</span> <span class="text-xs text-gray-400">(CODE)</span></td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+
+        <!-- Synchronisation & Clients -->
+        <tr class="cat-hdr"><td colspan="5" class="px-4 py-2">Synchronisation &amp; Clients</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Web Interface</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Desktop Clients</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Mobile Apps</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Multi-Account Support</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Sync Konfliktmanagement</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+
+        <!-- Sicherheit & Compliance -->
+        <tr class="cat-hdr"><td colspan="5" class="px-4 py-2">Sicherheit &amp; Compliance</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">TLS Transportverschlüsselung</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Multi-Faktor-Authentifizierung</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">OAuth2 / OIDC</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Single Sign-On</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Rollen- &amp; Rechteverwaltung</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">DSGVO-Unterstützung</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Ende-zu-Ende Verschlüsselung</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Audit Logs</td><td class="text-center px-4 py-2.5 text-gray-300">—</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Datei-Firewall</td><td class="text-center px-4 py-2.5 text-gray-300">—</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Ransomware-Schutz</td><td class="text-center px-4 py-2.5 text-gray-300">—</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Antivirus-Scanning</td><td class="text-center px-4 py-2.5 text-gray-300">—</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+
+        <!-- Integrationen -->
+        <tr class="cat-hdr"><td colspan="5" class="px-4 py-2">Integrationen</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">WebDAV</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">S3 Storage</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+
+        <!-- Administration & Deployment -->
+        <tr class="cat-hdr"><td colspan="5" class="px-4 py-2">Administration &amp; Deployment</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Docker Deployment</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Kubernetes Support</td><td class="text-center px-4 py-2.5 text-gray-300">—</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Monitoring &amp; Metrics</td><td class="text-center px-4 py-2.5 text-gray-300">—</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Zugang zu Production Releases</td><td class="text-center px-4 py-2.5 text-gray-300">—</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Zugang zu LTS Releases</td><td class="text-center px-4 py-2.5 text-gray-300">—</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+
+        <!-- Plattform & Architektur -->
+        <tr class="cat-hdr"><td colspan="5" class="px-4 py-2">Plattform &amp; Architektur</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Open Source Core</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Cloud-native Architektur</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Microservices</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Ressourcenoptimierung</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">API-basierte Architektur</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Multi-Tenancy</td><td class="text-center px-4 py-2.5 text-gray-300">—</td><td class="text-center px-4 py-2.5 text-gray-300">—</td><td class="col-biz text-center px-4 py-2.5 text-gray-300">—</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">White-Label / OEM</td><td class="text-center px-4 py-2.5 text-gray-300">—</td><td class="text-center px-4 py-2.5 text-gray-300">—</td><td class="col-biz text-center px-4 py-2.5 text-gray-300">—</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+
+        <!-- Erweiterbarkeit -->
+        <tr class="cat-hdr"><td colspan="5" class="px-4 py-2">Erweiterbarkeit</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Addon-System</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Marketplace Apps</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">API Erweiterungen</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+        <tr><td class="feat-col-sticky bg-white px-4 py-2.5">Branding</td><td class="text-center px-4 py-2.5 text-gray-300">—</td><td class="text-center px-4 py-2.5 text-gray-300">—</td><td class="col-biz text-center px-4 py-2.5 text-petrol font-bold">✓</td><td class="text-center px-4 py-2.5 text-petrol font-bold">✓</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="max-w-4xl mx-auto px-4 pb-20">
+  <h2 class="text-2xl font-bold text-petrol mb-10 text-center">FAQ</h2>
+
+  <!-- Allgemein -->
+  <div class="mb-8">
+    <h3 class="text-base font-bold text-petrol mb-3 px-1">Allgemein</h3>
+    <div class="space-y-1">
+      <div class="bg-white rounded acc-item card overflow-hidden">
+        <button class="acc-trigger w-full text-left px-5 py-4 flex justify-between items-center text-sm font-medium hover:text-lilac-dark">Was ist OpenCloud?<svg class="chevron w-4 h-4 text-gray-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button>
+        <div class="acc-body"><div class="px-5 pb-4 text-sm text-gray-500 leading-relaxed">OpenCloud ist eine Open-Source-Plattform für Filesharing, Synchronisation und Zusammenarbeit mit Fokus auf Datenschutz, Skalierbarkeit und moderne Cloud-native Architektur.</div></div>
+      </div>
+      <div class="bg-white rounded acc-item card overflow-hidden">
+        <button class="acc-trigger w-full text-left px-5 py-4 flex justify-between items-center text-sm font-medium hover:text-lilac-dark">Gibt es eine kostenlose Version?<svg class="chevron w-4 h-4 text-gray-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button>
+        <div class="acc-body"><div class="px-5 pb-4 text-sm text-gray-500 leading-relaxed">Ja. Die Community Edition von OpenCloud ist Open Source und kann kostenlos selbst betrieben werden.</div></div>
+      </div>
+      <div class="bg-white rounded acc-item card overflow-hidden">
+        <button class="acc-trigger w-full text-left px-5 py-4 flex justify-between items-center text-sm font-medium hover:text-lilac-dark">Was ist der Unterschied zwischen Community und den kommerziellen Plänen?<svg class="chevron w-4 h-4 text-gray-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button>
+        <div class="acc-body"><div class="px-5 pb-4 text-sm text-gray-500 leading-relaxed">Die kommerziellen Pläne enthalten zusätzliche Enterprise-Funktionen, Production Releases, Long-Term Support (LTS), Security Features sowie optionale Supportleistungen.</div></div>
+      </div>
+      <div class="bg-white rounded acc-item card overflow-hidden">
+        <button class="acc-trigger w-full text-left px-5 py-4 flex justify-between items-center text-sm font-medium hover:text-lilac-dark">Kann ich später auf einen höheren Plan upgraden?<svg class="chevron w-4 h-4 text-gray-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button>
+        <div class="acc-body"><div class="px-5 pb-4 text-sm text-gray-500 leading-relaxed">Ja. Ein Upgrade zwischen den Plänen ist jederzeit möglich.</div></div>
+      </div>
+      <div class="bg-white rounded acc-item card overflow-hidden">
+        <button class="acc-trigger w-full text-left px-5 py-4 flex justify-between items-center text-sm font-medium hover:text-lilac-dark">Gibt es eine SaaS-Version?<svg class="chevron w-4 h-4 text-gray-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button>
+        <div class="acc-body"><div class="px-5 pb-4 text-sm text-gray-500 leading-relaxed">OpenCloud ist primär für Self-Hosting und Sovereign Cloud Deployments ausgelegt. Managed-Hosting-Angebote werden über Partner angeboten.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lizenzierung & Subscriptions -->
+  <div class="mb-8">
+    <h3 class="text-base font-bold text-petrol mb-3 px-1">Lizenzierung &amp; Subscriptions</h3>
+    <div class="space-y-1">
+      <div class="bg-white rounded acc-item card overflow-hidden">
+        <button class="acc-trigger w-full text-left px-5 py-4 flex justify-between items-center text-sm font-medium hover:text-lilac-dark">Wie wird OpenCloud lizenziert?<svg class="chevron w-4 h-4 text-gray-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button>
+        <div class="acc-body"><div class="px-5 pb-4 text-sm text-gray-500 leading-relaxed">Die Community Edition ist Open Source. Kommerzielle Features und Supportleistungen werden über Subscription-Pläne bereitgestellt.</div></div>
+      </div>
+      <div class="bg-white rounded acc-item card overflow-hidden">
+        <button class="acc-trigger w-full text-left px-5 py-4 flex justify-between items-center text-sm font-medium hover:text-lilac-dark">Wird pro Benutzer abgerechnet?<svg class="chevron w-4 h-4 text-gray-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button>
+        <div class="acc-body"><div class="px-5 pb-4 text-sm text-gray-500 leading-relaxed">In den Tarifen Pro, Business und Enterprise wird pro Benutzer abgerechnet. Mit dem Add-On „High Performance Computing" wird pro Speicherkapazität abgerechnet, da hier in der Regel nur geringe Nutzerzahlen Zugriff erhalten. Kontaktieren Sie uns und wir finden eine Lösung, die für Sie passt.</div></div>
+      </div>
+      <div class="bg-white rounded acc-item card overflow-hidden">
+        <button class="acc-trigger w-full text-left px-5 py-4 flex justify-between items-center text-sm font-medium hover:text-lilac-dark">Benötige ich eine Subscription für den produktiven Einsatz?<svg class="chevron w-4 h-4 text-gray-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button>
+        <div class="acc-body"><div class="px-5 pb-4 text-sm text-gray-500 leading-relaxed">Nein. Die Community Edition kann produktiv genutzt werden. Kommerzielle Pläne bieten jedoch zusätzliche Stabilität, Security- und Compliance-Funktionen.</div></div>
+      </div>
+      <div class="bg-white rounded acc-item card overflow-hidden">
+        <button class="acc-trigger w-full text-left px-5 py-4 flex justify-between items-center text-sm font-medium hover:text-lilac-dark">Was beinhaltet der Zugang zu Production Releases?<svg class="chevron w-4 h-4 text-gray-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button>
+        <div class="acc-body"><div class="px-5 pb-4 text-sm text-gray-500 leading-relaxed">Production Releases enthalten getestete und für den produktiven Einsatz freigegebene Versionen mit stabilen Upgrade-Pfaden.</div></div>
+      </div>
+      <div class="bg-white rounded acc-item card overflow-hidden">
+        <button class="acc-trigger w-full text-left px-5 py-4 flex justify-between items-center text-sm font-medium hover:text-lilac-dark">Was sind LTS-Releases?<svg class="chevron w-4 h-4 text-gray-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button>
+        <div class="acc-body"><div class="px-5 pb-4 text-sm text-gray-500 leading-relaxed">Long-Term Support Releases erhalten über einen längeren Zeitraum Sicherheits- und Wartungsupdates.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Support -->
+  <div class="mb-8">
+    <h3 class="text-base font-bold text-petrol mb-3 px-1">Support</h3>
+    <div class="space-y-1">
+      <div class="bg-white rounded acc-item card overflow-hidden">
+        <button class="acc-trigger w-full text-left px-5 py-4 flex justify-between items-center text-sm font-medium hover:text-lilac-dark">Welchen Support bietet die Community Edition?<svg class="chevron w-4 h-4 text-gray-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button>
+        <div class="acc-body"><div class="px-5 pb-4 text-sm text-gray-500 leading-relaxed">Die Community Edition sowie der Pro-Plan beinhalten Community-Support über öffentliche Kanäle.</div></div>
+      </div>
+      <div class="bg-white rounded acc-item card overflow-hidden">
+        <button class="acc-trigger w-full text-left px-5 py-4 flex justify-between items-center text-sm font-medium hover:text-lilac-dark">Ist Professional Support im Pro-Plan enthalten?<svg class="chevron w-4 h-4 text-gray-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button>
+        <div class="acc-body"><div class="px-5 pb-4 text-sm text-gray-500 leading-relaxed">Nein. Der Pro-Plan enthält keinen Professional Support.</div></div>
+      </div>
+      <div class="bg-white rounded acc-item card overflow-hidden">
+        <button class="acc-trigger w-full text-left px-5 py-4 flex justify-between items-center text-sm font-medium hover:text-lilac-dark">Kann Professional Support hinzugebucht werden?<svg class="chevron w-4 h-4 text-gray-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button>
+        <div class="acc-body"><div class="px-5 pb-4 text-sm text-gray-500 leading-relaxed">Ja. Professional Support kann für Business- und Enterprise-Pläne optional hinzugebucht werden.</div></div>
+      </div>
+      <div class="bg-white rounded acc-item card overflow-hidden">
+        <button class="acc-trigger w-full text-left px-5 py-4 flex justify-between items-center text-sm font-medium hover:text-lilac-dark">Gibt es garantierte Reaktionszeiten?<svg class="chevron w-4 h-4 text-gray-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button>
+        <div class="acc-body"><div class="px-5 pb-4 text-sm text-gray-500 leading-relaxed">SLA-basierte Reaktionszeiten sind ausschließlich im Rahmen eines zusätzlichen Professional Support Vertrags verfügbar.</div></div>
+      </div>
+      <div class="bg-white rounded acc-item card overflow-hidden">
+        <button class="acc-trigger w-full text-left px-5 py-4 flex justify-between items-center text-sm font-medium hover:text-lilac-dark">Unterstützt OpenCloud Migrationen?<svg class="chevron w-4 h-4 text-gray-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button>
+        <div class="acc-body"><div class="px-5 pb-4 text-sm text-gray-500 leading-relaxed">Ja. Unterstützung für Migrationen und Enterprise-Onboarding kann im Rahmen kommerzieller Support-Angebote bereitgestellt werden. Sprechen Sie uns an und wir werden eine für Sie passende Lösung finden.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sicherheit & Compliance -->
+  <div class="mb-8">
+    <h3 class="text-base font-bold text-petrol mb-3 px-1">Sicherheit &amp; Compliance</h3>
+    <div class="space-y-1">
+      <div class="bg-white rounded acc-item card overflow-hidden">
+        <button class="acc-trigger w-full text-left px-5 py-4 flex justify-between items-center text-sm font-medium hover:text-lilac-dark">Unterstützt OpenCloud DSGVO-Anforderungen?<svg class="chevron w-4 h-4 text-gray-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button>
+        <div class="acc-body"><div class="px-5 pb-4 text-sm text-gray-500 leading-relaxed">Ja. OpenCloud wurde für datenschutzfreundliche und souveräne Deployments entwickelt und unterstützt DSGVO-relevante Anforderungen.</div></div>
+      </div>
+      <div class="bg-white rounded acc-item card overflow-hidden">
+        <button class="acc-trigger w-full text-left px-5 py-4 flex justify-between items-center text-sm font-medium hover:text-lilac-dark">Unterstützt OpenCloud Single Sign-On?<svg class="chevron w-4 h-4 text-gray-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button>
+        <div class="acc-body"><div class="px-5 pb-4 text-sm text-gray-500 leading-relaxed">Ja. OpenCloud unterstützt OAuth2, OpenID Connect und weitere SSO-Integrationen.</div></div>
+      </div>
+      <div class="bg-white rounded acc-item card overflow-hidden">
+        <button class="acc-trigger w-full text-left px-5 py-4 flex justify-between items-center text-sm font-medium hover:text-lilac-dark">Was ist eine SBOM?<svg class="chevron w-4 h-4 text-gray-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button>
+        <div class="acc-body"><div class="px-5 pb-4 text-sm text-gray-500 leading-relaxed">Eine Software Bill of Materials (SBOM) dokumentiert enthaltene Komponenten und Abhängigkeiten für Security- und Compliance-Anforderungen.</div></div>
+      </div>
+      <div class="bg-white rounded acc-item card overflow-hidden">
+        <button class="acc-trigger w-full text-left px-5 py-4 flex justify-between items-center text-sm font-medium hover:text-lilac-dark">Erhalte ich Sicherheitsupdates vor der öffentlichen Veröffentlichung?<svg class="chevron w-4 h-4 text-gray-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button>
+        <div class="acc-body"><div class="px-5 pb-4 text-sm text-gray-500 leading-relaxed">Ja. Kommerzielle Pläne enthalten Vorabzugang zu sicherheitsrelevanten Patches.</div></div>
+      </div>
+      <div class="bg-white rounded acc-item card overflow-hidden">
+        <button class="acc-trigger w-full text-left px-5 py-4 flex justify-between items-center text-sm font-medium hover:text-lilac-dark">Unterstützt OpenCloud Passwort-Richtlinien?<svg class="chevron w-4 h-4 text-gray-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button>
+        <div class="acc-body"><div class="px-5 pb-4 text-sm text-gray-500 leading-relaxed">Ja. Erweiterte Passwort-Policies sind in den Business- und Enterprise-Tiers verfügbar.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Deployment & Infrastruktur -->
+  <div class="mb-8">
+    <h3 class="text-base font-bold text-petrol mb-3 px-1">Deployment &amp; Infrastruktur</h3>
+    <div class="space-y-1">
+      <div class="bg-white rounded acc-item card overflow-hidden">
+        <button class="acc-trigger w-full text-left px-5 py-4 flex justify-between items-center text-sm font-medium hover:text-lilac-dark">Kann OpenCloud auf Kubernetes betrieben werden?<svg class="chevron w-4 h-4 text-gray-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button>
+        <div class="acc-body"><div class="px-5 pb-4 text-sm text-gray-500 leading-relaxed">Ja. OpenCloud unterstützt Kubernetes-Deployments und Helm-Charts im Business- und Enterprise-Tier.</div></div>
+      </div>
+      <div class="bg-white rounded acc-item card overflow-hidden">
+        <button class="acc-trigger w-full text-left px-5 py-4 flex justify-between items-center text-sm font-medium hover:text-lilac-dark">Unterstützt OpenCloud Hochverfügbarkeit?<svg class="chevron w-4 h-4 text-gray-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button>
+        <div class="acc-body"><div class="px-5 pb-4 text-sm text-gray-500 leading-relaxed">Ja. Hochverfügbarkeits-Deployments sind im Business- und Enterprise-Tier unterstützt.</div></div>
+      </div>
+      <div class="bg-white rounded acc-item card overflow-hidden">
+        <button class="acc-trigger w-full text-left px-5 py-4 flex justify-between items-center text-sm font-medium hover:text-lilac-dark">Welche Speicherlösungen werden unterstützt?<svg class="chevron w-4 h-4 text-gray-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button>
+        <div class="acc-body"><div class="px-5 pb-4 text-sm text-gray-500 leading-relaxed">OpenCloud unterstützt lokale Speicher sowie S3-kompatible Object Storage-Systeme. Mit dem HPC Add-On kommen Ceph, GPFS und Leil FS hinzu.</div></div>
+      </div>
+      <div class="bg-white rounded acc-item card overflow-hidden">
+        <button class="acc-trigger w-full text-left px-5 py-4 flex justify-between items-center text-sm font-medium hover:text-lilac-dark">Benötigt OpenCloud eine relationale Datenbank?<svg class="chevron w-4 h-4 text-gray-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button>
+        <div class="acc-body"><div class="px-5 pb-4 text-sm text-gray-500 leading-relaxed">Nein. OpenCloud wurde entwickelt, um ohne klassische relationale Datenbank auszukommen.</div></div>
+      </div>
+      <div class="bg-white rounded acc-item card overflow-hidden">
+        <button class="acc-trigger w-full text-left px-5 py-4 flex justify-between items-center text-sm font-medium hover:text-lilac-dark">Kann OpenCloud air-gapped betrieben werden?<svg class="chevron w-4 h-4 text-gray-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button>
+        <div class="acc-body"><div class="px-5 pb-4 text-sm text-gray-500 leading-relaxed">Je nach Deployment-Szenario sind isolierte und eingeschränkte Netzwerkumgebungen möglich.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Enterprise & OEM -->
+  <div class="mb-8">
+    <h3 class="text-base font-bold text-petrol mb-3 px-1">Enterprise &amp; OEM</h3>
+    <div class="space-y-1">
+      <div class="bg-white rounded acc-item card overflow-hidden">
+        <button class="acc-trigger w-full text-left px-5 py-4 flex justify-between items-center text-sm font-medium hover:text-lilac-dark">Unterstützt OpenCloud Multi-Tenancy?<svg class="chevron w-4 h-4 text-gray-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button>
+        <div class="acc-body"><div class="px-5 pb-4 text-sm text-gray-500 leading-relaxed">Ja. Multi-Tenancy ist im Enterprise-Plan verfügbar.</div></div>
+      </div>
+      <div class="bg-white rounded acc-item card overflow-hidden">
+        <button class="acc-trigger w-full text-left px-5 py-4 flex justify-between items-center text-sm font-medium hover:text-lilac-dark">Kann OpenCloud unter eigenem Branding betrieben werden?<svg class="chevron w-4 h-4 text-gray-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button>
+        <div class="acc-body"><div class="px-5 pb-4 text-sm text-gray-500 leading-relaxed">Ja. White-Label- und OEM-Szenarien werden im Enterprise-Plan unterstützt.</div></div>
+      </div>
+      <div class="bg-white rounded acc-item card overflow-hidden">
+        <button class="acc-trigger w-full text-left px-5 py-4 flex justify-between items-center text-sm font-medium hover:text-lilac-dark">Können wir Einfluss auf die Produkt-Roadmap nehmen?<svg class="chevron w-4 h-4 text-gray-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button>
+        <div class="acc-body"><div class="px-5 pb-4 text-sm text-gray-500 leading-relaxed">Ja. Enterprise-Kunden erhalten die Möglichkeit, Anforderungen und Prioritäten direkt mit dem Produktteam zu diskutieren.</div></div>
+      </div>
+      <div class="bg-white rounded acc-item card overflow-hidden">
+        <button class="acc-trigger w-full text-left px-5 py-4 flex justify-between items-center text-sm font-medium hover:text-lilac-dark">Gibt es Partner- oder OEM-Programme?<svg class="chevron w-4 h-4 text-gray-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button>
+        <div class="acc-body"><div class="px-5 pb-4 text-sm text-gray-500 leading-relaxed">Ja. Kontaktieren Sie uns für OEM-, Integrations- oder Reseller-Partnerschaften.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Migration & Kompatibilität -->
+  <div class="mb-8">
+    <h3 class="text-base font-bold text-petrol mb-3 px-1">Migration &amp; Kompatibilität</h3>
+    <div class="space-y-1">
+      <div class="bg-white rounded acc-item card overflow-hidden">
+        <button class="acc-trigger w-full text-left px-5 py-4 flex justify-between items-center text-sm font-medium hover:text-lilac-dark">Unterstützt OpenCloud WebDAV?<svg class="chevron w-4 h-4 text-gray-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button>
+        <div class="acc-body"><div class="px-5 pb-4 text-sm text-gray-500 leading-relaxed">Ja. OpenCloud bietet vollständige WebDAV-Unterstützung.</div></div>
+      </div>
+      <div class="bg-white rounded acc-item card overflow-hidden">
+        <button class="acc-trigger w-full text-left px-5 py-4 flex justify-between items-center text-sm font-medium hover:text-lilac-dark">Gibt es Integrationen mit Microsoft 365?<svg class="chevron w-4 h-4 text-gray-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button>
+        <div class="acc-body"><div class="px-5 pb-4 text-sm text-gray-500 leading-relaxed">Nein. OpenCloud unterstützt zur Zeit keine Microsoft-Integrationen.</div></div>
+      </div>
+      <div class="bg-white rounded acc-item card overflow-hidden">
+        <button class="acc-trigger w-full text-left px-5 py-4 flex justify-between items-center text-sm font-medium hover:text-lilac-dark">Können bestehende Daten migriert werden?<svg class="chevron w-4 h-4 text-gray-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button>
+        <div class="acc-body"><div class="px-5 pb-4 text-sm text-gray-500 leading-relaxed">Ja. Migrationen aus bestehenden Storage- und Collaboration-Systemen sind grundsätzlich möglich. Sprechen Sie uns an und wir werden eine für Sie passende Lösung finden.</div></div>
+      </div>
+      <div class="bg-white rounded acc-item card overflow-hidden">
+        <button class="acc-trigger w-full text-left px-5 py-4 flex justify-between items-center text-sm font-medium hover:text-lilac-dark">Unterstützt OpenCloud mobile Geräte?<svg class="chevron w-4 h-4 text-gray-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button>
+        <div class="acc-body"><div class="px-5 pb-4 text-sm text-gray-500 leading-relaxed">Ja. OpenCloud bietet Clients und Apps für Desktop, iOS und Android.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-petrol-dark text-white">
+  <div class="max-w-6xl mx-auto px-4 py-10 flex flex-col md:flex-row items-center justify-between gap-4">
+    <span class="font-bold text-lg tracking-tight">OpenCloud</span>
+    <div class="flex gap-6 text-sm text-gray-300">
+      <a href="https://opencloud.eu/de/impressum" class="hover:text-white transition-colors">Impressum</a>
+      <a href="https://opencloud.eu/de/datenschutz" class="hover:text-white transition-colors">Datenschutz</a>
+      <a href="https://opencloud.eu/de/kontakt" class="hover:text-white transition-colors">Kontakt</a>
+    </div>
+    <span class="text-gray-500 text-xs">&copy; 2025 OpenCloud</span>
+  </div>
+</footer>
+
+<script>
+  // Sticky header
+  const hdr = document.getElementById('hdr');
+  window.addEventListener('scroll', () => {
+    hdr.classList.toggle('hdr-scrolled', window.scrollY > 10);
+  });
+
+  // FAQ accordion
+  document.querySelectorAll('.acc-trigger').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.acc-item');
+      const body = item.querySelector('.acc-body');
+      const chevron = btn.querySelector('.chevron');
+      const isOpen = body.classList.contains('open');
+
+      // Close all siblings in the same group
+      const group = item.closest('.space-y-1');
+      group.querySelectorAll('.acc-body.open').forEach(openBody => {
+        openBody.classList.remove('open');
+        openBody.closest('.acc-item').querySelector('.chevron').classList.remove('rotated');
+      });
+
+      // Toggle clicked item
+      if (!isOpen) {
+        body.classList.add('open');
+        chevron.classList.add('rotated');
+      }
+    });
+  });
+</script>
+
 </body>
 </html>
