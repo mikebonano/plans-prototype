@@ -9,6 +9,9 @@
     tailwind.config = {
       theme: {
         extend: {
+          fontFamily: {
+            sans: ["'OpenCloud'", 'system-ui', 'sans-serif'],
+          },
           colors: {
             lilac: '#e2baff',
             'lilac-dark': '#ca8df5',
@@ -21,6 +24,18 @@
     }
   </script>
   <style>
+    @font-face {
+      font-family: 'OpenCloud';
+      font-weight: 400;
+      font-style: normal;
+      src: url('fonts/OpenCloud-Regular.otf') format('opentype');
+    }
+    @font-face {
+      font-family: 'OpenCloud';
+      font-weight: 700;
+      font-style: normal;
+      src: url('fonts/OpenCloud-Bold.otf') format('opentype');
+    }
     .btn-pill { border-radius: 50px; transition: all 0.3s ease-in-out; }
     .card { border-radius: 6px; }
     .card-rec { box-shadow: 0 0 0 2px #ca8df5; }
