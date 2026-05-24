@@ -39,8 +39,7 @@
     .btn-pill { border-radius: 50px; transition: all 0.3s ease-in-out; }
     .card { border-radius: 6px; }
     .card-rec { box-shadow: 0 0 0 2px #ca8df5; }
-    .hdr-scrolled { backdrop-filter: blur(12px); background-color: rgba(241,243,244,0.88) !important; }
-    .col-biz { background-color: rgba(226,186,255,0.07); }
+.col-biz { background-color: rgba(226,186,255,0.07); }
     .acc-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s ease-in-out; }
     .acc-body.open { grid-template-rows: 1fr; }
     .acc-body > div { overflow: hidden; }
@@ -56,7 +55,7 @@
 <body class="bg-paper text-gray-800 font-sans">
 
 <!-- HEADER -->
-<header id="hdr" class="fixed top-0 left-0 right-0 z-50 bg-paper transition-all duration-300">
+<header id="hdr" class="bg-paper">
   <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
     <a href="https://opencloud.eu" class="text-petrol font-bold text-xl tracking-tight">OpenCloud</a>
     <a href="https://opencloud.eu/de/kontakt" class="btn-pill bg-petrol text-white px-5 py-2 text-sm font-semibold hover:bg-petrol-dark">Anfragen</a>
@@ -64,7 +63,7 @@
 </header>
 
 <!-- HERO -->
-<section class="pt-32 pb-16 text-center px-4">
+<section class="pt-16 pb-16 text-center px-4">
   <h1 class="text-4xl md:text-5xl font-bold text-petrol leading-tight">Preise und Pläne</h1>
   <p class="mt-4 text-lg text-gray-500 max-w-xl mx-auto">Wählen Sie den Plan, der zu Ihrem Unternehmen passt – von professionellen Teams bis zu globalen Enterprises</p>
 </section>
@@ -194,12 +193,12 @@
   <div class="overflow-x-auto rounded-lg shadow-sm border border-gray-200">
     <table class="w-full min-w-[620px] bg-white text-sm border-collapse">
       <thead>
-        <tr class="sticky top-16 z-10 bg-petrol text-white">
-          <th class="feat-col-sticky bg-petrol text-left px-4 py-3 font-semibold w-56">Feature</th>
-          <th class="px-4 py-3 font-semibold text-center w-28">Community</th>
-          <th class="px-4 py-3 font-semibold text-center w-24">Pro</th>
-          <th class="col-biz px-4 py-3 font-semibold text-center w-28">Business</th>
-          <th class="px-4 py-3 font-semibold text-center w-28">Enterprise</th>
+        <tr class="bg-petrol text-white">
+          <th class="sticky top-0 z-20 feat-col-sticky bg-petrol text-left px-4 py-3 font-semibold w-56">Feature</th>
+          <th class="sticky top-0 z-10 bg-petrol px-4 py-3 font-semibold text-center w-28">Community</th>
+          <th class="sticky top-0 z-10 bg-petrol px-4 py-3 font-semibold text-center w-24">Pro</th>
+          <th class="sticky top-0 z-10 col-biz bg-petrol px-4 py-3 font-semibold text-center w-28">Business</th>
+          <th class="sticky top-0 z-10 bg-petrol px-4 py-3 font-semibold text-center w-28">Enterprise</th>
         </tr>
       </thead>
       <tbody class="feat-tbody">
@@ -492,12 +491,6 @@
 </footer>
 
 <script>
-  // Sticky header
-  const hdr = document.getElementById('hdr');
-  window.addEventListener('scroll', () => {
-    hdr.classList.toggle('hdr-scrolled', window.scrollY > 10);
-  });
-
   // FAQ accordion
   document.querySelectorAll('.acc-trigger').forEach(btn => {
     btn.addEventListener('click', () => {
